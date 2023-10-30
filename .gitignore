@@ -1,0 +1,12 @@
+/node_modules
+/environment
+
+# const ENV = {
+#     RANDOM_TOKEN_SECRET: 'xxxxxxxxx',
+#     PORT: 9999999,
+#     DB_ID: 'xxxxxxxxxx',
+#     DB_PW: 'xxxxxxxxxx',
+# }
+
+*.log
+package-lock.json
