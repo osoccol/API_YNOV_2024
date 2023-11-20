@@ -7,6 +7,7 @@ const auth = require('../middlewares/auth');
 
 // Routes CRUD
 router.post('/login', [logger], userController.login);
+router.post('/loginwithgoogle', [logger], userController.loginwithgoogle);
 router.post('/signup', [logger], userController.createUser); // POST = CREATE = CREATION
 
 router.get('/:id', [logger], userController.getUser); // GET = READ = LECTURE

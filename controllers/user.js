@@ -3,6 +3,22 @@ const bcrpyt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const ENV = require('../environment/environment');
 
+const { OAuth2Client } = require('google-auth-library');
+const clientID = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
+const client = new OAuth2Client(clientID);
+
+
+async function verify(token, req, res) {
+    const ticket = await client.verifyIdToken({
+        idToken: token,
+        audience: clientID
+    });
+
+    const payload = ticket.getPayload();
+
+    return payload;
+}
+
 exports.createUser = (req, res) => {
     bcrpyt.hash(req.body.password, 10)
         .then((hash) => {
@@ -47,6 +63,18 @@ exports.login = (req, res) => {
         }).catch(() => {
             res.status(404).json({ "message": "User not found" });
         })
+}
+
+exports.loginwithgoogle = (req, res) => {
+    let token = req.body.token;
+    console.log(token);
+
+    verify(token).then((infos) => {
+        console.log(infos);
+        res.status(200).json(infos);
+    }).catch((err) => {
+        res.status(403).json({message: 'FORBIDDEN'})
+    })
 }
 
 exports.getUser = (req, res) => {
