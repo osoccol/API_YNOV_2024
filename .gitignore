@@ -1,5 +1,4 @@
 /node_modules
-/environment
 
 # const ENV = {
 #     RANDOM_TOKEN_SECRET: 'xxxxxxxxx',
