@@ -26,7 +26,6 @@ mongoose.connect(DB).then(() => {
     console.log('MongoDB ERROR', err);
 });
 
-
 app.use(bodyParser.json());
 // ROUTES
 const apiRoutes = require('./routes/api');
@@ -35,5 +34,9 @@ const userRoutes = require('./routes/user');
 app.use('/api/', apiRoutes);
 app.use('/api/pokemons/', pokemonRoutes);
 app.use('/api/users/', userRoutes);
+
+app.use('/', (req, res) => {
+    res.status(200).json({"message": "API accessible"})
+});
 
 module.exports = app;
